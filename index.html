@@ -1,0 +1,413 @@
+<html lang="it"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Sentiment</title>
+<style>
+  :root { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111; }
+  body { margin:0; background:#f6f7fb; padding:20px; }
+  header { display:flex; gap:12px; align-items:center; margin-bottom:18px; }
+  h1 { font-size:18px; margin:0; }
+  .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
+  input[type="search"], input[type="url"] { padding:8px 10px; border-radius:8px; border:1px solid #ddd; min-width:260px; }
+  button { padding:8px 10px; border-radius:8px; border:0; background:#0b76ef; color:white; cursor:pointer; font-weight:600; }
+  button.ghost { background:#fff; color:#0b76ef; border:1px solid #cfe0fb; }
+  .grid { display:grid; gap:10px; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); margin-top:14px; }
+  .card { background:#fff; padding:12px; border-radius:10px; box-shadow:0 6px 18px rgba(20,30,60,0.06); display:flex; flex-direction:column; min-height:88px; }
+  .meta { font-size:0.9rem; color:#0b76ef; word-break:break-all; margin-bottom:8px; }
+  .actions { margin-top:auto; display:flex; gap:8px; align-items:center; }
+  .small { font-size:0.85rem; color:#666; }
+  .muted { color:#888; font-size:0.85rem; }
+  .topbar { display:flex; gap:8px; align-items:center; width:100%; }
+  .link-btn { background:#0b76ef; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:600; display:inline-block; }
+  .copy { background:#eee; color:#333; padding:6px 8px; border-radius:6px; cursor:pointer; border:1px solid #ddd; }
+  .delete { background:#fff0f0; color:#c71b1b; padding:6px 8px; border-radius:6px; cursor:pointer; border:1px solid #f2caca; }
+  .add-input { flex:1; padding:8px 10px; border-radius:8px; border:1px solid #ddd; min-width:0; }
+  .add-row { display:flex; gap:8px; margin-top:8px; align-items:center; }
+  .save-note { font-size:0.82rem; color:#555; margin-left:8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Dashboard Sentiment</h1>
+  <div class="controls">
+    <button id="saveFileBtn" title="Salva le modifiche direttamente nel file dashboard_sentiment.html">Salva su file</button>
+    <span class="save-note">Salva le aggiunte nel file HTML (renderà le modifiche persistenti)</span>
+  </div>
+</header>
+
+<div id="list" class="grid" aria-live="polite"><div class="card">
+        <div class="meta"><a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener noreferrer">https://edition.cnn.com/markets/fear-and-greed</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://edition.cnn.com/markets/fear-and-greed">Copia link</button>
+          <button class="delete" data-url="https://edition.cnn.com/markets/fear-and-greed" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.cboe.com/us/options/market_statistics/daily/" target="_blank" rel="noopener noreferrer">https://www.cboe.com/us/options/market_statistics/daily/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.cboe.com/us/options/market_statistics/daily/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.cboe.com/us/options/market_statistics/daily/">Copia link</button>
+          <button class="delete" data-url="https://www.cboe.com/us/options/market_statistics/daily/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://ycharts.com/indicators/us_investor_sentiment_bearish" target="_blank" rel="noopener noreferrer">https://ycharts.com/indicators/us_investor_sentiment_bearish</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://ycharts.com/indicators/us_investor_sentiment_bearish" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://ycharts.com/indicators/us_investor_sentiment_bearish">Copia link</button>
+          <button class="delete" data-url="https://ycharts.com/indicators/us_investor_sentiment_bearish" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://ycharts.com/indicators/us_investor_sentiment_bullish" target="_blank" rel="noopener noreferrer">https://ycharts.com/indicators/us_investor_sentiment_bullish</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://ycharts.com/indicators/us_investor_sentiment_bullish" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://ycharts.com/indicators/us_investor_sentiment_bullish">Copia link</button>
+          <button class="delete" data-url="https://ycharts.com/indicators/us_investor_sentiment_bullish" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://ycharts.com/indicators/us_investor_sentiment_neutral" target="_blank" rel="noopener noreferrer">https://ycharts.com/indicators/us_investor_sentiment_neutral</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://ycharts.com/indicators/us_investor_sentiment_neutral" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://ycharts.com/indicators/us_investor_sentiment_neutral">Copia link</button>
+          <button class="delete" data-url="https://ycharts.com/indicators/us_investor_sentiment_neutral" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://it.investing.com/economic-calendar/sentix-investor-confidence-268" target="_blank" rel="noopener noreferrer">https://it.investing.com/economic-calendar/sentix-investor-confidence-268</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://it.investing.com/economic-calendar/sentix-investor-confidence-268" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://it.investing.com/economic-calendar/sentix-investor-confidence-268">Copia link</button>
+          <button class="delete" data-url="https://it.investing.com/economic-calendar/sentix-investor-confidence-268" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.currentmarketvaluation.com/models/buffett-indicator.php" target="_blank" rel="noopener noreferrer">https://www.currentmarketvaluation.com/models/buffett-indicator.php</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.currentmarketvaluation.com/models/buffett-indicator.php" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.currentmarketvaluation.com/models/buffett-indicator.php">Copia link</button>
+          <button class="delete" data-url="https://www.currentmarketvaluation.com/models/buffett-indicator.php" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.investing.com/economic-calendar/cpi-69" target="_blank" rel="noopener noreferrer">https://www.investing.com/economic-calendar/cpi-69</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.investing.com/economic-calendar/cpi-69" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.investing.com/economic-calendar/cpi-69">Copia link</button>
+          <button class="delete" data-url="https://www.investing.com/economic-calendar/cpi-69" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics" target="_blank" rel="noopener noreferrer">https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics">Copia link</button>
+          <button class="delete" data-url="https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.ici.org/research/stats/flows" target="_blank" rel="noopener noreferrer">https://www.ici.org/research/stats/flows</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.ici.org/research/stats/flows" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.ici.org/research/stats/flows">Copia link</button>
+          <button class="delete" data-url="https://www.ici.org/research/stats/flows" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://am.jpmorgan.com/us/en/asset-management/adv/insights/etf-insights/etf-monitor/" target="_blank" rel="noopener noreferrer">https://am.jpmorgan.com/us/en/asset-management/adv/insights/etf-insights/etf-monitor/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://am.jpmorgan.com/us/en/asset-management/adv/insights/etf-insights/etf-monitor/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://am.jpmorgan.com/us/en/asset-management/adv/insights/etf-insights/etf-monitor/">Copia link</button>
+          <button class="delete" data-url="https://am.jpmorgan.com/us/en/asset-management/adv/insights/etf-insights/etf-monitor/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://etfdb.com/etf-fund-flows/#issuer=blackrock-inc" target="_blank" rel="noopener noreferrer">https://etfdb.com/etf-fund-flows/#issuer=blackrock-inc</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://etfdb.com/etf-fund-flows/#issuer=blackrock-inc" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://etfdb.com/etf-fund-flows/#issuer=blackrock-inc">Copia link</button>
+          <button class="delete" data-url="https://etfdb.com/etf-fund-flows/#issuer=blackrock-inc" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://tradingeconomics.com/calendar?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">https://tradingeconomics.com/calendar?utm_source=chatgpt.com</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://tradingeconomics.com/calendar?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://tradingeconomics.com/calendar?utm_source=chatgpt.com">Copia link</button>
+          <button class="delete" data-url="https://tradingeconomics.com/calendar?utm_source=chatgpt.com" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://etfdb.com/etfs/issuers/?utm_source=chatgpt.com#issuer-power-rankings__aum&amp;sort_name=performance_position&amp;sort_order=asc&amp;page=1" target="_blank" rel="noopener noreferrer">https://etfdb.com/etfs/issuers/?utm_source=chatgpt.com#issuer-power-rankings__aum&amp;sort_name=performance_position&amp;sort_order=asc&amp;page=1</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://etfdb.com/etfs/issuers/?utm_source=chatgpt.com#issuer-power-rankings__aum&amp;sort_name=performance_position&amp;sort_order=asc&amp;page=1" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://etfdb.com/etfs/issuers/?utm_source=chatgpt.com#issuer-power-rankings__aum&amp;sort_name=performance_position&amp;sort_order=asc&amp;page=1">Copia link</button>
+          <button class="delete" data-url="https://etfdb.com/etfs/issuers/?utm_source=chatgpt.com#issuer-power-rankings__aum&amp;sort_name=performance_position&amp;sort_order=asc&amp;page=1" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://en.macromicro.me/series/23955/nasdaq-100-pe" target="_blank" rel="noopener noreferrer">https://en.macromicro.me/series/23955/nasdaq-100-pe</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://en.macromicro.me/series/23955/nasdaq-100-pe" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://en.macromicro.me/series/23955/nasdaq-100-pe">Copia link</button>
+          <button class="delete" data-url="https://en.macromicro.me/series/23955/nasdaq-100-pe" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://en.macromicro.me/series/20052/sp500-forward-pe-ratio" target="_blank" rel="noopener noreferrer">https://en.macromicro.me/series/20052/sp500-forward-pe-ratio</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://en.macromicro.me/series/20052/sp500-forward-pe-ratio" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://en.macromicro.me/series/20052/sp500-forward-pe-ratio">Copia link</button>
+          <button class="delete" data-url="https://en.macromicro.me/series/20052/sp500-forward-pe-ratio" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://en.macromicro.me/series/1633/us-sp500-pe-ratio" target="_blank" rel="noopener noreferrer">https://en.macromicro.me/series/1633/us-sp500-pe-ratio</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://en.macromicro.me/series/1633/us-sp500-pe-ratio" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://en.macromicro.me/series/1633/us-sp500-pe-ratio">Copia link</button>
+          <button class="delete" data-url="https://en.macromicro.me/series/1633/us-sp500-pe-ratio" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.gurufocus.com/economic_indicators/6778/nasdaq-100-pe-ratio" target="_blank" rel="noopener noreferrer">https://www.gurufocus.com/economic_indicators/6778/nasdaq-100-pe-ratio</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.gurufocus.com/economic_indicators/6778/nasdaq-100-pe-ratio" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.gurufocus.com/economic_indicators/6778/nasdaq-100-pe-ratio">Copia link</button>
+          <button class="delete" data-url="https://www.gurufocus.com/economic_indicators/6778/nasdaq-100-pe-ratio" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.etf.com/etfanalytics/etf-fund-flows-tool" target="_blank" rel="noopener noreferrer">https://www.etf.com/etfanalytics/etf-fund-flows-tool</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.etf.com/etfanalytics/etf-fund-flows-tool" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.etf.com/etfanalytics/etf-fund-flows-tool">Copia link</button>
+          <button class="delete" data-url="https://www.etf.com/etfanalytics/etf-fund-flows-tool" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.tradingview.com/symbols/NYMEX-CL1!/forward-curve/" target="_blank" rel="noopener noreferrer">https://www.tradingview.com/symbols/NYMEX-CL1!/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.tradingview.com/symbols/NYMEX-CL1!/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.tradingview.com/symbols/NYMEX-CL1!/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://www.tradingview.com/symbols/NYMEX-CL1!/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.tradingview.com/symbols/COMEX-GC1!/forward-curve/" target="_blank" rel="noopener noreferrer">https://www.tradingview.com/symbols/COMEX-GC1!/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.tradingview.com/symbols/COMEX-GC1!/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.tradingview.com/symbols/COMEX-GC1!/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://www.tradingview.com/symbols/COMEX-GC1!/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.tradingview.com/symbols/COMEX-SI1%21/forward-curve/" target="_blank" rel="noopener noreferrer">https://www.tradingview.com/symbols/COMEX-SI1%21/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.tradingview.com/symbols/COMEX-SI1%21/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.tradingview.com/symbols/COMEX-SI1%21/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://www.tradingview.com/symbols/COMEX-SI1%21/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.tradingview.com/symbols/CME_MINI-ES1%21/forward-curve/" target="_blank" rel="noopener noreferrer">https://www.tradingview.com/symbols/CME_MINI-ES1%21/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.tradingview.com/symbols/CME_MINI-ES1%21/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.tradingview.com/symbols/CME_MINI-ES1%21/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://www.tradingview.com/symbols/CME_MINI-ES1%21/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://www.tradingview.com/symbols/CBOT-ZN1!/forward-curve/" target="_blank" rel="noopener noreferrer">https://www.tradingview.com/symbols/CBOT-ZN1!/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://www.tradingview.com/symbols/CBOT-ZN1!/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://www.tradingview.com/symbols/CBOT-ZN1!/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://www.tradingview.com/symbols/CBOT-ZN1!/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://it.tradingview.com/symbols/ICEUS-DX1%21/forward-curve/" target="_blank" rel="noopener noreferrer">https://it.tradingview.com/symbols/ICEUS-DX1%21/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://it.tradingview.com/symbols/ICEUS-DX1%21/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://it.tradingview.com/symbols/ICEUS-DX1%21/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://it.tradingview.com/symbols/ICEUS-DX1%21/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+        <div class="meta"><a href="https://it.tradingview.com/symbols/ICESG-SDX1!/forward-curve/" target="_blank" rel="noopener noreferrer">https://it.tradingview.com/symbols/ICESG-SDX1!/forward-curve/</a></div>
+        <div class="actions">
+          <a class="link-btn" href="https://it.tradingview.com/symbols/ICESG-SDX1!/forward-curve/" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="https://it.tradingview.com/symbols/ICESG-SDX1!/forward-curve/">Copia link</button>
+          <button class="delete" data-url="https://it.tradingview.com/symbols/ICESG-SDX1!/forward-curve/" title="Elimina questo sito">Elimina</button>
+        </div>
+      </div><div class="card">
+      <div class="small">Aggiungi nuovo sito (verrà aggiunto alla fine)</div>
+      <div class="add-row">
+        <input id="addUrlCard" class="add-input" type="url" placeholder="https://esempio.com">
+        <button id="addBtnCard" class="ghost">Aggiungi</button>
+      </div>
+    </div></div>
+
+<script>
+  // Chiave storage (usata solo per compatibilità precedente)
+  const STORAGE_KEY = 'dashboard_sentiment_urls';
+
+  // Lista iniziale (DEFAULT_URLS)
+  const DEFAULT_URLS = [
+  "https://edition.cnn.com/markets/fear-and-greed",
+  "https://www.cboe.com/us/options/market_statistics/daily/",
+  "https://ycharts.com/indicators/us_investor_sentiment_bearish",
+  "https://ycharts.com/indicators/us_investor_sentiment_bullish",
+  "https://ycharts.com/indicators/us_investor_sentiment_neutral",
+  "https://it.investing.com/economic-calendar/sentix-investor-confidence-268",
+  "https://www.currentmarketvaluation.com/models/buffett-indicator.php",
+  "https://www.investing.com/economic-calendar/cpi-69",
+  "https://www.finra.org/rules-guidance/key-topics/margin-accounts/margin-statistics",
+  "https://www.ici.org/research/stats/flows",
+  "https://am.jpmorgan.com/us/en/asset-management/adv/insights/etf-insights/etf-monitor/",
+  "https://etfdb.com/etf-fund-flows/#issuer=blackrock-inc",
+  "https://tradingeconomics.com/calendar?utm_source=chatgpt.com",
+  "https://etfdb.com/etfs/issuers/?utm_source=chatgpt.com#issuer-power-rankings__aum&sort_name=performance_position&sort_order=asc&page=1",
+  "https://en.macromicro.me/series/23955/nasdaq-100-pe",
+  "https://en.macromicro.me/series/20052/sp500-forward-pe-ratio",
+  "https://en.macromicro.me/series/1633/us-sp500-pe-ratio",
+  "https://www.gurufocus.com/economic_indicators/6778/nasdaq-100-pe-ratio",
+  "https://www.etf.com/etfanalytics/etf-fund-flows-tool",
+  "https://www.tradingview.com/symbols/NYMEX-CL1!/forward-curve/",
+  "https://www.tradingview.com/symbols/COMEX-GC1!/forward-curve/",
+  "https://www.tradingview.com/symbols/COMEX-SI1%21/forward-curve/",
+  "https://www.tradingview.com/symbols/CME_MINI-ES1%21/forward-curve/",
+  "https://www.tradingview.com/symbols/CBOT-ZN1!/forward-curve/",
+  "https://it.tradingview.com/symbols/ICEUS-DX1%21/forward-curve/",
+  "https://it.tradingview.com/symbols/ICESG-SDX1!/forward-curve/"
+];
+
+  // Pulizia obbligatoria della "cache" locale all'avvio (richiesta precedente)
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) { console.warn(e); }
+
+  // URLS in memoria (partono dai DEFAULT_URLS)
+  let URLS = DEFAULT_URLS.slice();
+
+  const container = document.getElementById('list');
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function renderList(urls) {
+    container.innerHTML = '';
+    urls.forEach((u) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="meta"><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(u)}</a></div>
+        <div class="actions">
+          <a class="link-btn" href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer">Apri originale (nuova scheda)</a>
+          <button class="copy" data-url="${escapeHtml(u)}">Copia link</button>
+          <button class="delete" data-url="${escapeHtml(u)}" title="Elimina questo sito">Elimina</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // add-card in fondo
+    const addCard = document.createElement('div');
+    addCard.className = 'card';
+    addCard.innerHTML = `
+      <div class="small">Aggiungi nuovo sito (verrà aggiunto alla fine)</div>
+      <div class="add-row">
+        <input id="addUrlCard" class="add-input" type="url" placeholder="https://esempio.com" />
+        <button id="addBtnCard" class="ghost">Aggiungi</button>
+      </div>
+    `;
+    container.appendChild(addCard);
+
+    const addCardInput = document.getElementById('addUrlCard');
+    const addCardBtn = document.getElementById('addBtnCard');
+    addCardBtn.addEventListener('click', () => {
+      const v = addCardInput.value && addCardInput.value.trim();
+      if (!v) return;
+      URLS.push(v);         // aggiungi in fondo
+      renderList(URLS);
+    });
+  }
+
+  // initial render
+  renderList(URLS);
+
+  // copia link / elimina link
+  container.addEventListener('click', (ev) => {
+    const t = ev.target;
+    if (t.matches('.copy')) {
+      const url = t.getAttribute('data-url');
+      navigator.clipboard && navigator.clipboard.writeText(url).then(() => {
+        t.textContent = 'Copiato!';
+        setTimeout(() => t.textContent = 'Copia link', 1200);
+      }).catch(() => {
+        alert('Copia negli appunti non disponibile. Copia manuale: ' + url);
+      });
+      return;
+    }
+
+    if (t.matches('.delete')) {
+      const url = t.getAttribute('data-url');
+      // conferma semplice per evitare cancellazioni accidentali
+      const ok = confirm('Eliminare questo sito dalla lista?\n' + url);
+      if (!ok) return;
+      const idx = URLS.indexOf(url);
+      if (idx !== -1) {
+        URLS.splice(idx, 1);
+        renderList(URLS);
+      } else {
+        // fallback: se non trovata (es. url soggetta a normalizzazione), rimuoviamo basandoci su confronto parziale
+        const newUrls = URLS.filter(u => u !== url);
+        URLS = newUrls;
+        renderList(URLS);
+      }
+      return;
+    }
+  });
+
+  // --- salvataggio robusto: aggiorna solo il blocco DEFAULT_URLS nell'outerHTML ---
+  const saveBtn = document.getElementById('saveFileBtn');
+  saveBtn.addEventListener('click', saveToFile);
+
+  async function saveToFile() {
+    try {
+      // prendi l'intero HTML corrente
+      let html = document.documentElement.outerHTML;
+
+      // costrusci la stringa JSON formattata per DEFAULT_URLS
+      const newDefault = 'const DEFAULT_URLS = ' + JSON.stringify(URLS, null, 2) + ';';
+
+      // sostituisci il primo occorrenza di "const DEFAULT_URLS = ...;" con la nuova
+      // regex: trova "const DEFAULT_URLS = [anything];"
+      const replaced = html.replace(/const\s+DEFAULT_URLS\s*=\s*\[[\s\S]*?\];/, newDefault);
+
+      // se File System Access è disponibile, chiedi file da sovrascrivere
+      if (window.showOpenFilePicker) {
+        try {
+          const [handle] = await window.showOpenFilePicker({
+            multiple: false,
+            types: [{ description: 'HTML file', accept: { 'text/html': ['.html'] } }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(replaced);
+          await writable.close();
+          alert('File salvato correttamente (hai sovrascritto il file selezionato).');
+          return;
+        } catch (err) {
+          // Se l'utente ha annullato la selezione (es. ha cliccato "Annulla"),
+          // non fare nulla: chiudiamo la dialog e usciamo dalla funzione senza effettuare il fallback.
+          const name = err && err.name;
+          const msg = err && err.message;
+          if (name === 'AbortError' || name === 'NotAllowedError' || /aborted|cancelled|cancelled|user cancelled|user aborted|user abort/i.test(msg || '')) {
+            // semplicemente esci: la dialog è stata chiusa dall'utente, non salvare nulla.
+            return;
+          }
+          // Altri errori legittimi vengono loggati e procederemo al fallback.
+          console.error('FS Access error:', err);
+        }
+      }
+
+      // fallback: crea download del file modificato
+      const blob = new Blob([replaced], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'dashboard_sentiment.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      alert('File generato per il download. Salvalo manualmente come "dashboard_sentiment.html" e sovrascrivi il file nella directory desiderata.');
+    } catch (err) {
+      console.error('Errore salvataggio:', err);
+      alert('Errore durante il salvataggio: ' + (err && err.message ? err.message : err));
+    }
+  }
+
+</script>
+
+
+
+
+</body></html>
